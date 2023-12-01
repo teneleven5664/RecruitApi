@@ -29,7 +29,6 @@ namespace Recruit.Repository
             if (pageSize > 0)
             {
                 query = query.Skip(pageSize * (pageNumber - 1)).Take(pageSize);
-                //test
             }
 
             if (includeProperties != null)
