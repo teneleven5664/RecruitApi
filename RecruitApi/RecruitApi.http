@@ -1,0 +1,6 @@
+@RecruitApi_HostAddress = http://localhost:5118
+
+GET {{RecruitApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
