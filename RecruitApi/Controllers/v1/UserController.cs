@@ -97,17 +97,25 @@ namespace RecruitApi.Controllers.v1
             {
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest(ModelState);
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = new List<string>() { "Invalid Data" };
+                    return BadRequest(_response);
                 }
                 if (await _recruitRepository.GetAsync<User>(u => u.UserName.ToLower() == userDTO.UserName.ToLower()) != null)
                 {
-                    ModelState.AddModelError("ErrorMessages", "User already Exists!");
-                    return BadRequest(ModelState);
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = new List<string>() { "User already Exists!" };
+                    return BadRequest(_response);
                 }
 
                 if (userDTO == null)
                 {
-                    return BadRequest(userDTO);
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = new List<string>() { "Invalid Data" };
+                    return BadRequest(_response);
                 }
 
                 User user = _mapper.Map<User>(userDTO);
